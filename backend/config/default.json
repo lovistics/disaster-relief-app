@@ -1,0 +1,91 @@
+{
+  "app": {
+    "name": "Disaster Relief Application",
+    "version": "1.0.0",
+    "description": "A real-time crowdsourcing platform for emergency response and resource management",
+    "requireEmailVerification": true
+  },
+  "server": {
+    "port": 5000,
+    "env": "development",
+    "cors": {
+      "origin": ["http://localhost:3000"],
+      "credentials": true
+    }
+  },
+  "jwt": {
+    "secret": "f26237edf8782afab7c357fd1363b52a52cc71ce506be4185211ec9d395a79ab700d22716cf56ed74a40eb9f3238d8c6952f65b44fdea8578aa4f9254d659779",
+    "expiresIn": "7d",
+    "cookie": {
+      "secure": false,
+      "httpOnly": true,
+      "sameSite": "lax"
+    }
+  },
+  "email": {
+    "from": "noreply@disaster-relief.com",
+    "verificationTimeout": 24,
+    "resetPasswordTimeout": 1
+  },
+  "geocoder": {
+    "provider": "opencage",
+    "httpAdapter": "https",
+    "apiKey": "f1aaec8271e74421bb36ece420507fbf"
+  },
+  "pagination": {
+    "limit": 10,
+    "maxLimit": 100
+  },
+  "matching": {
+    "maxDistance": 50,
+    "priorityWeights": {
+      "distance": 0.4,
+      "resourceType": 0.3,
+      "urgency": 0.3
+    },
+    "scoreThreshold": 50,
+    "maxMatches": 10
+  },
+  "notifications": {
+    "types": ["emergency", "resource", "system", "match"],
+    "priorities": ["low", "medium", "high", "critical"],
+    "expirationDays": {
+      "low": 30,
+      "medium": 60,
+      "high": 90,
+      "critical": 120
+    },
+    "cleanupInterval": "0 0 * * *"
+  },
+  "cache": {
+    "enabled": true,
+    "ttl": {
+      "resources": 300,
+      "emergencies": 300,
+      "users": 600,
+      "notifications": 60
+    },
+    "redis": {
+      "host": "localhost",
+      "port": 6379,
+      "password": null,
+      "db": 0
+    }
+  },
+  "security": {
+    "rateLimit": {
+      "windowMs": 900000,
+      "max": 100
+    },
+    "passwordPolicy": {
+      "minLength": 8,
+      "requireUppercase": true,
+      "requireNumbers": true,
+      "requireSymbols": true
+    }
+  },
+  "logging": {
+    "level": "info",
+    "format": "combined"
+  }
+}
